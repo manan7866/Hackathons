@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Resume</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(45deg,#8c01d1,#00b7ff);
+      display: flex; 
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: linear-gradient(45deg,#00b7ff,#8c01d1);
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border:3px solid #fff;
+      margin-bottom: 10px;
+      box-shadow: 3px 6px 3px rgba(0, 0, 0, 0.503);
+    }
+
+    h1, h2 {
+      color: #cccccc;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: linear-gradient(45deg,#00b7ff,#8c01d1);
+      color: #fff;
+      border:3px solid white;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 3px 6px 3px rgba(0, 0, 0, 0.503);
+      transition: all 1s;
+    }
+
+    button:hover {
+      transform: scale(1.1,1.1);
+      transition: all 1s;
+    }
+    p,li { color:#e8baff }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 100%;
+        padding: 10px;
+      }
+
+      .profile-pic {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <center><div class="personal-info">
+      <img src="manan.jpg" alt="Profile Picture" class="profile-pic">
+      <h1>Abdul Manan</h1>
+      <p><strong>Contact: abdulmananwighio06@gmail.com</strong></p>
+        <p><strong>0315 2116859</strong>
+    </div></center>
+
+    <div class="section" id="education">
+      <h2>Education</h2>
+      <p><strong>Matric</p></strong>
+    </div>
+
+    <div class="section" id="skills">
+      <h2>Skills</h2>
+      <ul>
+        <li><strong>JavaScript</strong></li>
+        <li><strong>TypeScript</strong></li>
+        <li><strong>HTML & CSS</strong></li>
+        <li><strong>React</strong></li>
+        <li><strong>Nextjs</strong></li>
+      </ul>
+    </div>
+
+    <div class="section" id="work-experience">
+      <h2>Work Experience</h2>
+      <p><strong>GIAIC 1st Quarter Complete</p></strong>
+      <p><strong>Web Development, Web 3.0, Metaverse</p></strong>
+    </div>
+
+    <center><button id="toggle-skills">Toggle Skills</button></center>
+  </div>
+
+  <script>
+    const toggleSkillsButton = document.getElementById('toggle-skills');
+    const skillsSection = document.getElementById('skills');
+
+    toggleSkillsButton.addEventListener('click', function() {
+      if (skillsSection.style.display === 'none' || skillsSection.style.display === '') {
+        skillsSection.style.display = 'block';
+      } else {
+        skillsSection.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
