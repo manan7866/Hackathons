@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Resume</title>
+    <style>
+        
+
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg,#01f701,#ffc800);
+    padding: 20px;
+  }
+
+        
+        h3 {
+            margin-top: 20px;
+        }
+        [contenteditable="false"] {
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #saveMessage {
+            color: green;
+            display: none;
+        }
+        .content {
+  max-width: 500px;
+  margin: auto;
+}
+.content {
+    background: linear-gradient(45deg,rgb(185, 44, 63), rgb(0, 21, 209));
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+  h1 {
+    background: linear-gradient(45deg,rgb(185, 44, 63), rgb(0, 21, 209));
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+
+    h1, h2, h3, p, li {
+    color: #ffffff;
+  }
+    </style>
+</head>
+<body>
+<div> <center><h1>Editable Resume</h1> </center></div>
+    
+
+    <div class="content" id="Personal Information">
+     <center> <h3>Personal Information</h3></center>
+        <p>Name: </p>
+        <p Abdul Manan  contenteditable="true"></p>
+        <p>Father Name:</p>
+        <p Abdul Rahman contenteditable="true"></p>
+        <p>Contact:</p>
+        <p contenteditable="true"></p>
+        <p>Email:</p>
+        <p contenteditable="true"></p>
+    </div>
+
+
+    <div class="content" id="education" contenteditable="true">
+        <h3>Education</h3>
+        <p>Degree: Matric</p>
+        <p>Konker College Karachi</p>
+        <p>Year: 2020</p>
+    </div>
+
+    <div class="content" id="experience" contenteditable="true">
+        <h3>Work Experience</h3>
+        <p>Position: Software Developer</p>
+        <p>Company: ABC Tech</p>
+        <p>Years: 2021 - Present</p>
+    </div>
+
+    <div class="content" id="saveMessage">Changes saved successfully!</div>
+
+    <script>
+        // Editable sections pr event listener lagao
+        document.querySelectorAll('[contenteditable]').forEach(function (section) {
+    section.addEventListener('input', function (event) {
+        var sectionId = event.target.id;
+        var updatedContent = event.target.innerHTML;
+        // Save changes ki call karo
+        saveChanges(sectionId, updatedContent);
+    });
+});
+// Changes save karne ka function
+function saveChanges(sectionId, content) {
+    // Example: Fake saving using localStorage (server pe bhejne ki jagah)
+    localStorage.setItem(sectionId, content);
+    // Show success message
+    var saveMessage = document.getElementById('saveMessage');
+    saveMessage.style.display = 'block';
+    setTimeout(function () {
+        saveMessage.style.display = 'none';
+    }, 2000);
+    console.log("Changes saved for section: ".concat(sectionId));
+}
+// Load saved content from localStorage on page load
+window.onload = function () {
+    document.querySelectorAll('[contenteditable]').forEach(function (section) {
+        var savedContent = localStorage.getItem(section.id);
+        if (savedContent) {
+            section.innerHTML = savedContent;
+        }
+0    });
+};
+    </script>
+
+</body>
+</html>
