@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Resume Builder</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+  <div class="container">
+    <center><h1>Dynamic Resume Builder</h1></center>
+    <form id="resume-form">
+      <center><h2>Personal Information</h2></center>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <center><h2>Education</h2></center>
+      <label for="education">Education (e.g., B.Sc. in Computer Science):</label>
+      <textarea id="education" rows="3" required></textarea>
+
+      <center><h2>Work Experience</h2></center>
+      <label for="experience">Work Experience:</label>
+      <textarea id="experience" rows="5" required></textarea>
+
+      <center><h2>Skills</h2></center>
+      <label for="skills">Skills (separate by commas):</label>
+      <input type="text" id="skills" required>
+
+      <center><button type="submit">Generate Resume</button></center>
+    </form>
+
+    <div id="resume-output" class="resume" style="display:none;">
+      <h2>Generated Resume</h2>
+      <div class="resume-section">
+        <h3>Personal Information</h3>
+        <p id="output-name"></p>
+        <p id="output-email"></p>
+      </div>
+      <div class="resume-section">
+        <h3>Education</h3>
+        <p id="output-education"></p>
+      </div>
+      <div class="resume-section">
+        <h3>Work Experience</h3>
+        <p id="output-experience"></p>
+      </div>
+      <div class="resume-section">
+        <h3>Skills</h3>
+        <ul id="output-skills"></ul>
+      </div>
+    </div>
+    <br />
+    <center><h2>Made By: Abdul Manan Wighio</h2></center>
+  </div>
+
+  <!-- TypeScript code -->
+  <script src="page03.js">
+    
+  </script>
+</body>
+</html>
