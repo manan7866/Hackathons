@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(to right, #11adeb, #049b50, #025b96)
+        }
+        #resume {
+            width: 80%;
+            margin: auto;
+            padding: 10px;
+            border: 1px solid #7cbe00;
+        }
+        .editable-section {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: linear-gradient(to right, #168ed3, #1fd606, #1b3edb);
+}
+
+        .editable-section:focus {
+            outline: none;
+        }
+        .button-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background: linear-gradient(to right, #168ed3, #1fd606, #1b3edb)
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="resume">
+        <div id="Personal Information" class="editable-section" contenteditable="true">
+            <h2>Personal Information</h2>
+            <p><strong>Name:</strong> Abdul Manan</p>
+            <p><strong>Email:</strong> abdulmananwighio06@gmail.com</p>
+            <p><strong>Contact:</strong> +923152116859</p>
+        </div>
+        <div id="Education" class="editable-section" contenteditable="true">
+       <h2>Education</h2>
+        <p><strong>Intermadiate</strong> </p></div>
+        <div id="Work Experience" class="editable-section" contenteditable="true"><h2>Work Experience</h2>
+        <p><strong>X,Y,Z</strong> </p></div>
+        <div id="Skills" class="editable-section" contenteditable="true"><h2>Skills</h2>
+            <p><strong>Typescript , HTML ,CSS </strong> </p></div>
+    </div>
+        <!-- Add more sections as needed -->
+    </div>
+
+    <div class="button-container">
+        <button class="button" id="generateCvBtn">Generate CV</button>
+        <button class="button hidden" id="downloadPdfBtn">Download PDF</button>
+    </div>
+
+    <div id="pdf-url" class="hidden">
+        <a id="pdfLink" href="" target="_blank">View or Download your CV PDF</a>
+    </div>
+
+    <div id="share-url" class="hidden">
+        <p>Share your resume link:</p>
+        <a id="resumeLink" href="" target="_blank">Resume URL</a>
+    </div>
+
+    <!-- jsPDF and jsPDF-AutoTable library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const { jsPDF } = window.jspdf;
+
+            const generateCvBtn = document.getElementById("generateCvBtn");
+            const downloadPdfBtn = document.getElementById("downloadPdfBtn");
+            const pdfLink = document.getElementById("pdfLink");
+            const shareUrlContainer = document.getElementById("share-url");
+            const resumeLink = document.getElementById("resumeLink");
+
+            let pdfBlobUrl = ""; // Variable to store the PDF Blob URL
+
+            generateCvBtn.addEventListener("click", () => {
+                const doc = new jsPDF();
+                const resumeSections = document.querySelectorAll("#resume .editable-section");
+
+                resumeSections.forEach((section, index) => {
+                    const sectionText = section.innerText;
+                    doc.text(sectionText, 10, 10 + (index * 60)); // Adjust spacing as needed
+                });
+
+                const pdfBlob = doc.output('blob');
+                pdfBlobUrl = URL.createObjectURL(pdfBlob); // Store PDF Blob URL
+
+                pdfLink.href = pdfBlobUrl;
+                pdfLink.textContent = 'View or Download your CV PDF';
+                pdfLink.classList.remove("hidden");
+
+                // Simulate unique URL generation
+                resumeLink.href = pdfBlobUrl; // Use the Blob URL for the resume link
+                resumeLink.textContent = pdfBlobUrl;
+                shareUrlContainer.classList.remove("hidden");
+                downloadPdfBtn.classList.remove("hidden");
+            });
+
+            downloadPdfBtn.addEventListener("click", () => {
+                const link = document.createElement('a');
+                link.href = pdfBlobUrl; // Use the Blob URL for downloading
+                link.download = 'resume.pdf';
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>
